@@ -169,11 +169,11 @@ punn/
 ## Citation
 
 ```bibtex
-@article{aldroubi2025punn,
-  title={Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions},
-  author={Aldroubi, Akram},
-  journal={},
-  year={2025}
+@article{aldroubi2026punn,
+  title   = {Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions},
+  author  = {Aldroubi, Akram},
+  year    = {2026},
+  note    = {arXiv preprint}
 }
 ```
 
