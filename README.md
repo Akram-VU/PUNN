@@ -230,7 +230,3 @@ PUNN/
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-Windsurf AI (Cascade) was used solely as a coding assistant for experiment implementation.
