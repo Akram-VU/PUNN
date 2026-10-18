@@ -4,8 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
+[![arXiv](https://img.shields.io/badge/arXiv-2602.00511-b31b1b.svg)](https://arxiv.org/abs/2602.00511)
 
-Official implementation of **"Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions"**.
+Official implementation of **"Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions"** — [arXiv:2602.00511](https://arxiv.org/abs/2602.00511).
 
 ## Overview
 
@@ -21,8 +22,8 @@ PUNN is a neural network architecture where class probabilities arise directly f
 ## Installation
 
 ```bash
-git clone https://github.com/Akram-VU/punn.git
-cd punn
+git clone https://github.com/Akram-VU/PUNN.git
+cd PUNN
 pip install -r requirements.txt
 ```
 
@@ -78,7 +79,15 @@ This guarantees $\sum_{i=1}^k h_i(x) = 1$ and $h_i(x) \geq 0$ for all $x$.
 
 ## Reproducing Paper Results
 
-### Synthetic Experiments (Table 1, Figures 1-2)
+> **Note on paper versions.** The experiment scripts in this repository
+> reproduce the results of [arXiv:2602.00511](https://arxiv.org/abs/2602.00511). The
+> `experiments/` directory covers the January 2026 arXiv tables
+> (synthetic, UCI, MNIST, shape-informed); additional scripts covering
+> the ordering study, the CIFAR-100 experiment, and the misclassified-digit
+> gate trace from the revised version are in `experiments/ordering/`,
+> `experiments/cifar/`, and `experiments/interpretability/`.
+
+### Synthetic Experiments (Table 1, Figures 1–2)
 
 ```bash
 cd experiments
@@ -87,7 +96,7 @@ python synthetic_experiments.py
 
 Datasets: Moons, Circles, XOR, Helix
 
-### UCI Benchmarks (Table 2)
+### UCI Benchmarks (originally Table 2; revised Table 1)
 
 ```bash
 python uci_experiments.py
@@ -95,17 +104,52 @@ python uci_experiments.py
 
 Datasets: Iris, Wine, Breast Cancer, Digits, Pendigits, Satimage, Optdigits
 
-### MNIST (Table 3)
+### MNIST (originally Table 3)
 
 ```bash
 python mnist_experiments.py
 ```
 
-### Shape-Informed Experiments (Table 4, Figures 3-4)
+### Shape-Informed Experiments (Table 4, Figures 3–4)
 
 ```bash
 python shape_informed_experiments.py
 ```
+
+### Class-Ordering Study (revised Table 2)
+
+PUNN's recursive construction depends on the choice of class ordering;
+this script measures how much that choice affects test accuracy across
+10 random permutations.
+
+```bash
+python experiments/ordering/mnist_ordering_study.py
+```
+
+### CIFAR-100 (revised Table 3)
+
+CNN backbone + PUNN head with a single partition-of-unity output of
+`K = 2000` components (20 partitions per class for `C = 100` classes),
+compared against a matched-parameter softmax head.
+
+```bash
+python experiments/cifar/cifar100_punn_single_nn_k2000.py
+```
+
+Runs 3 seeds, 60 epochs each; designed for Colab/GPU.
+
+### MNIST Interpretability Trace (revised Figure 2)
+
+Trains PUNN-Sigma on MNIST and produces a per-example trace of the
+gate values `g_0, ..., g_8` and partition values `h_0, ..., h_9` for
+a correctly classified and a misclassified example.
+
+```bash
+python experiments/interpretability/mnist_interpretability_trace.py
+```
+
+Outputs `mnist_trace.pdf` (figure) and `mnist_trace.txt` (human-readable
+trace).
 
 ## Results Summary
 
@@ -137,16 +181,22 @@ python shape_informed_experiments.py
 ## Project Structure
 
 ```
-punn/
+PUNN/
 ├── models/
 │   ├── __init__.py
-│   ├── punn_models.py      # Core PUNN, gate functions, MLP baseline
-│   └── shape_informed.py   # Shape-informed gate implementations
+│   ├── punn_models.py                     # Core PUNN, gate functions, MLP baseline
+│   └── shape_informed.py                  # Shape-informed gate implementations
 ├── experiments/
 │   ├── synthetic_experiments.py
 │   ├── uci_experiments.py
 │   ├── mnist_experiments.py
-│   └── shape_informed_experiments.py
+│   ├── shape_informed_experiments.py
+│   ├── cifar/
+│   │   └── cifar100_punn_single_nn_k2000.py
+│   ├── ordering/
+│   │   └── mnist_ordering_study.py
+│   └── interpretability/
+│       └── mnist_interpretability_trace.py
 ├── requirements.txt
 └── README.md
 ```
@@ -173,7 +223,7 @@ punn/
   title   = {Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions},
   author  = {Aldroubi, Akram},
   year    = {2026},
-  note    = {arXiv preprint}
+  note    = {arXiv:2602.00511}
 }
 ```
 
