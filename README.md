@@ -5,6 +5,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.00511-b31b1b.svg)](https://arxiv.org/abs/2602.00511)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23463875.svg)](https://doi.org/10.5281/zenodo.23463875)
 
 Official implementation of **"Partition of Unity Neural Networks for Interpretable Classification with Explicit Class Regions"** — [arXiv:2602.00511](https://arxiv.org/abs/2602.00511).
 
